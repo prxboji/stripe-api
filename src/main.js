@@ -43,7 +43,7 @@ class STRIPE {
 
             const amount = helpers.randomAmount();
 
-            const req = await fetch('https://api.stripe.com/v1/payment_intents', {
+            const req = await fetch(this.base_url + '/v1/payment_intents', {
                 method: 'POST',
                 headers: {
                   'Content-Type': 'application/x-www-form-urlencoded',
