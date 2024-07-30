@@ -7,6 +7,9 @@ class STRIPE {
 
     constructor ()
     {
+
+        this.base_url = 'https://api.stripe.com';
+
         this.keys = {
             pk: process.env.PK,
             sk: process.env.SK
@@ -17,7 +20,7 @@ class STRIPE {
     {
         try {
 
-            const req = await fetch('https://api.stripe.com/v1/payment_methods', {
+            const req = await fetch(this.base_url + '/v1/payment_methods', {
                 method: 'POST',
                 headers: {
                   'Content-Type': 'application/x-www-form-urlencoded',
