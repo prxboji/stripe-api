@@ -60,7 +60,7 @@ class STRIPE {
         }
     }
 
-    async confirmPaymentIntents (paymentIntentsId)
+    async confirmPaymentIntents (paymentIntentsId, email)
     {
         try {
 
@@ -70,7 +70,7 @@ class STRIPE {
                   'Authorization': 'Basic ' + btoa(this.keys.sk)
                 },
                 body: new URLSearchParams({
-                  'receipt_email': 'seiba@seiba.me',
+                  'receipt_email': email,
                 })
             });
 
