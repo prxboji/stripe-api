@@ -1,6 +1,8 @@
 const fetch = require('node-fetch');
 require('dotenv').config();
 
+const helpers = require('./helpers/helpers');
+
 class STRIPE {
 
     constructor ()
@@ -36,13 +38,15 @@ class STRIPE {
     {
         try {
 
+            const amount = helpers.randomAmount();
+
             const req = await fetch('https://api.stripe.com/v1/payment_intents', {
                 method: 'POST',
                 headers: {
                   'Content-Type': 'application/x-www-form-urlencoded',
                   'Authorization': 'Basic ' + btoa(this.keys.sk)
                 },
-                body: `automatic_payment_methods[enabled]=true&automatic_payment_methods[allow_redirects]=never&amount=100&currency=usd&payment_method=${paymentId}`
+                body: `automatic_payment_methods[enabled]=true&automatic_payment_methods[allow_redirects]=never&amount=${amount}&currency=usd&payment_method=${paymentId}`
             });
 
             const res = await req.json();
