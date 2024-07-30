@@ -57,6 +57,28 @@ class STRIPE {
         }
     }
 
+    async confirmPaymentIntents (paymentIntentsId)
+    {
+        try {
+
+            const req = await fetch(`https://api.stripe.com/v1/payment_intents/${paymentIntentsId}/confirm`, {
+                method: 'POST',
+                headers: {
+                  'Authorization': 'Basic ' + btoa(this.keys.sk)
+                },
+                body: new URLSearchParams({
+                  'receipt_email': 'seiba@seiba.me',
+                })
+            });
+
+            const res = await req.json();
+            return res;
+            
+        } catch (e) {
+            return e;
+        }
+    }
+
 }
 
 module.exports = STRIPE;
