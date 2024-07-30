@@ -64,7 +64,7 @@ class STRIPE {
     {
         try {
 
-            const req = await fetch(`https://api.stripe.com/v1/payment_intents/${paymentIntentsId}/confirm`, {
+            const req = await fetch(this.base_url + '/v1/payment_intents/' + paymentIntentsId + '/confirm', {
                 method: 'POST',
                 headers: {
                   'Authorization': 'Basic ' + btoa(this.keys.sk)
