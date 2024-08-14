@@ -103,7 +103,7 @@ class STRIPE {
         }
     }
 
-    async createCharge (paymentId)
+    async createCharge (tokenId)
     {
         try {
 
