@@ -3,12 +3,18 @@ const bot = new STRIPE();
 
 (async () => {
 
-    const createPaymentMethod = await bot.createPaymentMethod('4242424242424241', '09', '28', '550');
-    if (createPaymentMethod.id) {
-        console.log(createPaymentMethod);
-        
+    var cards = '4242424242424242|12|25|155';
+    var ccn = cards.split('|')[0];
+    var exp_month = cards.split('|')[1];
+    var exp_year = cards.split('|')[2];
+    var cvc = cards.split('|')[3];
+
+    const createToken = await bot.createToken(ccn, exp_month, exp_year, cvc);
+    if (createToken.id) {
+        const createCharge = await bot.createCharge(createToken.id);
+        console.log(createCharge);
     } else {
-        console.log(`[DIED] ${createPaymentMethod.error.message}`);
+        console.log(`[DIED] ${createToken.error.message}`);
     }
 
 })();
