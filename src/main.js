@@ -103,6 +103,31 @@ class STRIPE {
         }
     }
 
+    async createCharge (paymentId)
+    {
+        try {
+
+            const amount = helpers.randomAmount();
+
+            const req = await fetch(this.base_url + '/v1/charges', {
+                method: 'POST',
+                headers: {
+                    'Authorization': 'Basic ' + btoa(this.keys.sk)
+                },
+                body: new URLSearchParams({
+                    'amount': amount,
+                    'currency': 'usd',
+                    'source': `${paymentId}`,
+                })
+            });
+
+            const res = await req.json();
+            return res;
+            
+        } catch (e) {
+            return e;
+        }
+    }
     
 }
 
