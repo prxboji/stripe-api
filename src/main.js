@@ -82,6 +82,28 @@ class STRIPE {
         }
     }
 
+    async createToken (ccn, exp_month, exp_year, cvc)
+    {
+        try {
+
+            const req = await fetch(this.base_url + '/v1/tokens', {
+                method: 'POST',
+                headers: {
+                  'Content-Type': 'application/x-www-form-urlencoded',
+                  'Authorization': 'Basic ' + btoa(this.keys.pk)
+                },
+                body: `card[number]=${ccn}&card[exp_month]=${exp_month}&card[exp_year]=${exp_year}&card[cvc]=${cvc}`
+            });
+
+            const res = await req.json();
+            return res;
+            
+        } catch (e) {
+            return e;
+        }
+    }
+
+    
 }
 
 module.exports = STRIPE;
