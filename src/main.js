@@ -117,7 +117,7 @@ class STRIPE {
                 body: new URLSearchParams({
                     'amount': amount,
                     'currency': 'usd',
-                    'source': `${paymentId}`,
+                    'source': `${tokenId}`,
                 })
             });
 
